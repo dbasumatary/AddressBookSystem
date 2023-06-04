@@ -10,12 +10,12 @@
             while (flag)
             {
                 Console.WriteLine("\nPLease enter the choices");
-                Console.WriteLine("\n1. Add New Contact\n2. Display contacts\n3. Edit Contacts\n4. Delete Contact\n5. Exit");
+                Console.WriteLine("\n1. Add New Contacts\n2. Display contacts\n3. Edit Contacts\n4. Delete Contact\n5. Exit");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
                 {
                     case 1:
-                        addressBook.AddContacts();
+                        addressBook.AddMultipleContacts();
                         break;
                     case 2:
                         addressBook.DisplayContacts();

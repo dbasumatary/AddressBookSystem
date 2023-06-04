@@ -15,7 +15,7 @@ namespace AddressBookSystem
         {
             Contacts contactNew = new Contacts();
 
-            Console.Write("Enter the First Name: ");
+            Console.Write("\nEnter the First Name: ");
             contactNew.firstName = Console.ReadLine();
             Console.Write("Enter the Last Name: ");
             contactNew.lastName = Console.ReadLine();
@@ -32,8 +32,20 @@ namespace AddressBookSystem
             Console.Write("Enter the Email: ");
             contactNew.email = Console.ReadLine();
 
-            contactList.Add(contactNew);
             return contactNew;
+        }
+
+        public void AddMultipleContacts()
+        {
+            Console.WriteLine("\nEnter the number of contacts you want to add ");
+            int inputNumber = Convert.ToInt32(Console.ReadLine());
+            for (int i = 0; i < inputNumber; i++)
+            {
+                Contacts contact = AddContacts();
+                contactList.Add(contact);
+            }
+            Console.WriteLine("\nThe added contacts are: ");
+            DisplayContacts();
         }
 
         public void EditContacts()
@@ -45,8 +57,8 @@ namespace AddressBookSystem
                 return;
             }
             Console.WriteLine("\nContact matched! Please enter the new details of the contact");
-            contactList.RemoveAt(index);
-            contactList[index] = AddContacts();
+            Contacts updatedContact = AddContacts();
+            contactList[index] = updatedContact;
             Console.WriteLine("\nThe contact has been successfully updated.");
             Console.WriteLine("\nThe new updated contact is:");
             DisplayContacts();
@@ -54,7 +66,7 @@ namespace AddressBookSystem
 
         public int FindContact()
         {
-            Console.Write("Please enter the first name of contact: ");
+            Console.Write("\nPlease enter the first name of contact: ");
             string inputName = Console.ReadLine();
             inputName = inputName.ToLower();
             foreach (Contacts contact in contactList)
