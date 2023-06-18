@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,8 @@ namespace AddressBookSystem
 {
     public class AddressBook
     {
-        ArrayList contactList = new ArrayList();
+        List<Contacts> contactList = new List<Contacts>();
+        string filePath = "C:\\Users\\MSI\\source\\repos\\AddressBookSystem\\AddressBookSystem\\filejson.txt";
 
         public Contacts AddContacts()
         {
@@ -99,6 +101,45 @@ namespace AddressBookSystem
             {
                 Console.WriteLine(contact);
             }
+        }
+
+        public void WriteFileJson()
+        {
+            try
+            {
+                string jsonContent = JsonConvert.SerializeObject(contactList);
+                File.WriteAllText(filePath, jsonContent);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred while writing JSON data to the file: {ex.Message}");
+            }
+        }
+
+        public void ReadFileJson()
+        {
+            try
+            {
+                string fileContent = File.ReadAllText(filePath);
+                contactList = JsonConvert.DeserializeObject<List<Contacts>>(fileContent);
+
+                foreach (Contacts person in contactList)
+                {
+                    Console.WriteLine(person);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred while reading JSON data from the file: {ex.Message}");
+            }
+        }
+    }
+
+    public class CustomException : Exception
+    {
+        public CustomException(string message) : base(message) 
+        {
+            Console.WriteLine("Please enter a valid input");
         }
     }
 }
