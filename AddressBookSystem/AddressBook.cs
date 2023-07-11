@@ -11,7 +11,7 @@ namespace AddressBookSystem
     public class AddressBook
     {
         List<Contacts> contactList = new List<Contacts>();
-        string filePath = "C:\\Users\\MSI\\source\\repos\\AddressBookSystem\\AddressBookSystem\\filejson.txt";
+        string filePath = "C:\\Users\\hp\\source\\repos\\AddressBookSystem\\AddressBookSystem\\filejson.txt";
 
         public Contacts AddContacts()
         {
@@ -107,8 +107,9 @@ namespace AddressBookSystem
         {
             try
             {
-                string jsonContent = JsonConvert.SerializeObject(contactList);
-                File.WriteAllText(filePath, jsonContent);
+                string jsonContent = JsonConvert.SerializeObject(contactList, Formatting.Indented);
+                File.AppendAllText(filePath, jsonContent);
+                Console.WriteLine("Successfully written to json file");
             }
             catch (Exception ex)
             {
